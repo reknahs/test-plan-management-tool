@@ -3,7 +3,7 @@
 ## Overview
 This is a minimal AI-based test plan management tool. 
 
-## 🏗️ Architecture & Technical Choices
+## Architecture & Technical Choices
 
 ### Backend (FastAPI - Python)
 - **Framework**: FastAPI for REST API development with automatic OpenAPI documentation
@@ -22,7 +22,7 @@ This is a minimal AI-based test plan management tool.
 - **FastAPI**: Modern, async-ready, automatic documentation, strong typing
 - **SQLite**: Zero configuration, suitable for development/demos
 - **React**: Industry standard, component-based, efficient for this scale
-- **Local AI**: Privacy-focused, no API costs, works offline
+- **Local Mixtral**: Privacy-focused, no API costs, works offline, 7B works well for relatively complex tasks like summarizing a long description into test steps
 
 ## 🚀 Getting Started
 
@@ -61,27 +61,27 @@ npm install
 
 ### Running the Application
 
-#### Step 1: Start Ollama AI Service (Terminal 1)
+#### Step 1: Start Ollama AI Service
 ```bash
 ollama serve
 ```
+If you navigate to `http://localhost:11434/` and it says `Ollama`, you're good to go. 
 *Note: Ollama must be running for AI suggestions to work*
 
-#### Step 2: Start Backend Server (Terminal 2)
+#### Step 2: Start Backend Server (Terminal 1)
 ```bash
 cd backend
 source venv/bin/activate  # Activate virtual environment
 uvicorn backend.main:app --reload
 ```
-Backend will be available at: `http://localhost:8000`
 API Documentation: `http://localhost:8000/docs`
 
-#### Step 3: Start Frontend Application (Terminal 3)
+#### Step 3: Start Frontend Application (Terminal 2)
 ```bash
 cd frontend
 npm start
 ```
-Frontend will be available at: `http://localhost:3000` (opens automatically)
+Frontend will be available at: `http://localhost:3000`
 
 ## 📖 Usage Guide
 
@@ -103,30 +103,39 @@ Frontend will be available at: `http://localhost:3000` (opens automatically)
 - Modify title, description, or test steps
 - Click "Save" to update
 
-#### 4. AI-Powered Test Suggestions
+#### 4. AI-Based Test Suggestions
 - Enter document text (requirements, specifications, etc.)
 - Click "Get Suggestions"
-- AI generates: Intelligent title, description, and test steps
+- AI generates title, description, and test steps
 - Click "Import Suggestions as New Plan" to create plan from AI output
+- Click "Create" to save to list of test plans
 
 ### Example Document Input
 ```
-Our login system requires users to authenticate with email and password.
-Users should be able to reset their password via email link.
-The system must validate input formats and prevent brute force attacks.
+Feature: Test Plan API
+
+The backend exposes RESTful endpoints for creating, viewing, updating, and deleting test plans. 
+Each test plan has a title, description, and list of test steps. 
+Users can also add, edit, and delete individual test steps via API. 
+There is an AI feature that suggests test steps based on a given input document.
 ```
 
 ### Expected AI Output
-**Title**: User Authentication System Testing
-**Description**: Comprehensive testing for login, registration, and security features
+**Title**: API Test Plan for RESTful Endpoints
+**Description**: This test plan verifies the functionality and integrity of the API endpoints for creating, viewing, updating, and deleting test plans, managing test steps, and utilizing AI-suggested test steps.
 **Steps**:
-1. Verify email/password login functionality
-2. Test password reset via email link
-3. Validate input format requirements
-4. Check brute force attack prevention
-5. Test session management and logout
+1. Verify that the API is accessible and returns a status code 200 for the base URL.
+2. Create a new test plan with a unique title and description using the appropriate endpoint and verify the response contains the created test plan data.
+3. Retrieve an existing test plan by ID, ensure the returned data matches the stored test plan details.
+4. Update an existing test plan's title and description using the API and confirm that the updated information is correctly saved and retrievable.
+5. Delete a test plan using the API and verify it can no longer be retrieved or updated.
+6. Add, edit, and delete individual test steps for a given test plan using the corresponding API endpoints and confirm changes are saved correctly.
+7. Test AI-suggested test steps by providing an input document to the AI feature and verifying that the returned test steps are relevant and can be added to an existing test plan.
+8. Perform negative tests, such as attempting to create a test plan with invalid data or deleting non-existent test plans, to ensure proper error handling is in place.
+9. Monitor API response times and error rates during load testing to assess performance under various scenarios.
+10. Validate the security of the API by testing for unauthorized access attempts and ensuring that only authorized users can create, update, delete or view test plans and their respective steps.
 
-## 🔧 Technical Implementation Details
+## Technical Implementation Details
 
 ### Database Schema
 ```python
@@ -161,52 +170,28 @@ TestStep:
 ## 🤖 AI Assistance Used
 
 ### Development Tools & Libraries
-- **GitHub Copilot**: Code completion and suggestions throughout development
-- **ChatGPT-4**: Initial project planning and architecture decisions
-- **Claude**: Code review and optimization suggestions (specifically for React component structure)
-- **Perplexity**: Research on FastAPI-SQLAlchemy integration patterns
+- **VSCode**: Used for running project
+- **Cline (free x-ai/grok-code-fast-1)**: Used for planning structure of project and generating most of the frontend
+- **ChatGPT-4**: Used for generating parts of the backend 
 
 ### Specific AI-Assisted Features
-1. **Database Relationship Setup**: Copilot suggested optimal SQLAlchemy relationship configuration
-2. **React State Management**: Claude provided best practices for handling complex form states
-3. **Error Handling Patterns**: ChatGPT recommended comprehensive try-catch blocks and user feedback mechanisms
-4. **CORS Configuration**: Copilot assisted with proper FastAPI CORS middleware setup
-5. **API Request Formatting**: Claude suggested optimal Axios configuration for the frontend
+1. Database Relationship Setup
+2. React State Management
+3. Error Handling Patterns
+4. CORS Configuration
+5. API Request Formatting 
 
-### AI-Generated Content vs Original Code
-- **AI Generated**: ~40% of code (boilerplate, configuration, standard patterns)
-- **Original Implementation**: ~60% of code (business logic, custom features, integration logic)
-- **AI Refinement**: Used AI suggestions but adapted them to fit specific requirements
-
-## ⚠️ Known Limitations & Future Enhancements
-
-### Current Limitations
-- **Database**: SQLite (not suitable for production multi-user scenarios)
-- **AI**: Requires local Ollama installation and sufficient hardware
-- **UI**: Basic styling, non-responsive design
-- **Authentication**: No user authentication or authorization
-- **Validation**: Basic frontend validation only
-
-### Potential Enhancements
-- **Database**: PostgreSQL with connection pooling
-- **AI**: Cloud-based alternatives (OpenAI, Claude API) for better reliability
-- **UI**: Modern design system (Material-UI, Tailwind CSS)
-- **Features**: Test execution tracking, reports, team collaboration
-- **Security**: User authentication, data encryption, API rate limiting
-
-## 🧪 Testing & Validation
+## Testing
 
 ### Manual Testing Performed
-- ✅ Test plan CRUD operations
-- ✅ AI suggestion generation with various document types
-- ✅ Frontend-backend communication
-- ✅ Error handling and loading states
-- ✅ Database relationships and constraints
+- Test plan CRUD operations
+- AI suggestion generation with different document types
+- Frontend-backend communication
+- Error handling
 
 ### Performance Notes
-- **AI Generation**: 5+ seconds (normal for local LLM inference)
+- **AI Generation**: 5+ seconds 
 - **API Response**: <100ms for standard CRUD operations
-- **Frontend Load**: Instant with local development server
 
 ## 📁 Project Structure
 ```
@@ -227,26 +212,6 @@ test-plan-management-tool/
 │       └── index.css       # Global styles
 └── README.md               # This documentation
 ```
-
-## 🏆 Development Highlights
-
-### Clean Architecture
-- Clear separation between frontend and backend
-- RESTful API design
-- Proper error handling and user feedback
-- Responsive state management
-
-### AI Integration
-- Local, privacy-focused AI approach
-- Structured prompt engineering for consistent results
-- Graceful fallbacks when AI is unavailable
-
-### User Experience
-- Real-time loading indicators during AI generation
-- Intuitive import workflow for AI suggestions
-- Optimized for quick test plan creation and management
-
----
 
 ## 📞 Support & Contact
 

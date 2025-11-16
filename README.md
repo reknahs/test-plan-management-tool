@@ -212,3 +212,8 @@ test-plan-management-tool/
 │       └── index.css       # Global styles
 └── README.md               # This documentation
 ```
+
+## Examples
+![1](images/ai.png)
+![2](images/aigenerated.png)
+![3](images/homepage.png)

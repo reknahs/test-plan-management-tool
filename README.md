@@ -40,7 +40,7 @@ This is a minimal AI-based test plan management tool.
 cd backend
 
 # Create Python virtual environment
-python -m venv venv
+python3 -m venv venv
 
 # Activate virtual environment
 source venv/bin/activate  # (Linux/Mac)
@@ -123,7 +123,9 @@ There is an AI feature that suggests test steps based on a given input document.
 
 ### Expected AI Output
 **Title**: API Test Plan for RESTful Endpoints
+
 **Description**: This test plan verifies the functionality and integrity of the API endpoints for creating, viewing, updating, and deleting test plans, managing test steps, and utilizing AI-suggested test steps.
+
 **Steps**:
 1. Verify that the API is accessible and returns a status code 200 for the base URL.
 2. Create a new test plan with a unique title and description using the appropriate endpoint and verify the response contains the created test plan data.

@@ -171,8 +171,8 @@ TestStep:
 
 ### Development Tools & Libraries
 - **VSCode**: Used for running project
-- **Cline (free x-ai/grok-code-fast-1)**: Used for planning structure of project and generating most of the frontend
-- **ChatGPT-4**: Used for generating parts of the backend 
+- **Cline (free x-ai/grok-code-fast-1)**: Used for planning structure of project, generating most of the frontend, and generating most of the code for database models
+- **ChatGPT-4**: Used for helping with generating the REST API parts of the backend 
 
 ### Specific AI-Assisted Features
 1. Database Relationship Setup
@@ -212,9 +212,3 @@ test-plan-management-tool/
 │       └── index.css       # Global styles
 └── README.md               # This documentation
 ```
-
-## 📞 Support & Contact
-
-This tool demonstrates fundamental concepts in modern web development with AI integration. For questions or feedback, please refer to the codebase and implementation patterns.
-
-**Built with**: FastAPI, React, SQLAlchemy, Ollama/Mistral, and modern Python/JavaScript practices.

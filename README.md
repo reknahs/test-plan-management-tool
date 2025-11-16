@@ -115,30 +115,30 @@ Frontend will be available at: `http://localhost:3000`
 
 ### Example Document Input
 ```
-Feature: Test Plan API
+Feature: File Processing Service
 
-The backend exposes RESTful endpoints for creating, viewing, updating, and deleting test plans. 
-Each test plan has a title, description, and list of test steps. 
-Users can also add, edit, and delete individual test steps via API. 
-There is an AI feature that suggests test steps based on a given input document.
+The system should allow users to upload CSV files via an API endpoint. 
+Uploaded files should be validated to ensure they have the required columns: "name", "email", and "age". 
+The backend should parse the CSV, transform the data by normalizing names to title case, and filtering out rows with invalid email addresses. 
+Processed data should be saved to a database. 
+Users should be able to request a summary report that counts the number of valid and invalid rows in each file. 
+Errors during processing should be logged and returned to the user with meaningful messages.
 ```
 
-### Expected AI Output
-**Title**: API Test Plan for RESTful Endpoints
+### AI Output
+**Title**: File Processing Service API Test Plan
 
-**Description**: This test plan verifies the functionality and integrity of the API endpoints for creating, viewing, updating, and deleting test plans, managing test steps, and utilizing AI-suggested test steps.
+**Description**: This test plan focuses on validating the functionality and error handling of the File Processing Service API, ensuring proper upload, validation, parsing, normalization, filtering, saving, and reporting of CSV data, as well as logging errors.
 
 **Steps**:
-1. Verify that the API is accessible and returns a status code 200 for the base URL.
-2. Create a new test plan with a unique title and description using the appropriate endpoint and verify the response contains the created test plan data.
-3. Retrieve an existing test plan by ID, ensure the returned data matches the stored test plan details.
-4. Update an existing test plan's title and description using the API and confirm that the updated information is correctly saved and retrievable.
-5. Delete a test plan using the API and verify it can no longer be retrieved or updated.
-6. Add, edit, and delete individual test steps for a given test plan using the corresponding API endpoints and confirm changes are saved correctly.
-7. Test AI-suggested test steps by providing an input document to the AI feature and verifying that the returned test steps are relevant and can be added to an existing test plan.
-8. Perform negative tests, such as attempting to create a test plan with invalid data or deleting non-existent test plans, to ensure proper error handling is in place.
-9. Monitor API response times and error rates during load testing to assess performance under various scenarios.
-10. Validate the security of the API by testing for unauthorized access attempts and ensuring that only authorized users can create, update, delete or view test plans and their respective steps.
+1. Set up test environment, including the API endpoint, test database, and test files with valid and invalid data.
+2. Test successful file upload by sending a valid CSV file via the API endpoint and verifying its presence in the database.
+3. Test validation of required columns "name", "email", and "age" by providing CSV files with missing or incorrect column names.
+4. Test normalization of names to title case by comparing the saved data with the original test files.
+5. Test email address filtering by sending a CSV file containing both valid and invalid email addresses, and verifying that only the valid emails are saved in the database.
+6. Generate and verify summary reports, counting the number of valid and invalid rows in each processed file.
+7. Test error handling by intentionally introducing various errors (e.g., incorrect data types, corrupted CSV files) and ensuring that meaningful error messages are returned to the user.
+8. Log and review API response logs to validate that errors during processing have been logged as expected.
 
 ## Technical Implementation Details
 

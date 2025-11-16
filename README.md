@@ -1,10 +1,7 @@
 # Test Plan Management Tool
 
-## 📋 Assignment Overview
-As part of our ongoing efforts to streamline validation workflows, we introduce a minimal AI-based test plan management tool. This exercise assesses proficiency in AI, Python, web development fundamentals, and the ability to implement simple yet logical features. The assignment is intentionally scoped to be completed within a few hours.
-
-## 🎯 Objective
-Develop a basic AI-powered test plan management tool that suggests test steps based on input documents and allows users to create, view, edit, and delete test plans.
+## Overview
+This is a minimal AI-based test plan management tool. 
 
 ## 🏗️ Architecture & Technical Choices
 

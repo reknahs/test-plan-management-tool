@@ -70,8 +70,9 @@ If you navigate to `http://localhost:11434/` and it says `Ollama`, you're good t
 
 #### Step 2: Start Backend Server (Terminal 1)
 ```bash
-cd backend
-source venv/bin/activate  # Activate virtual environment
+# Navigate to project root directory
+cd [project-directory]
+source backend/venv/bin/activate  # Activate virtual environment
 uvicorn backend.main:app --reload
 ```
 API Documentation: `http://localhost:8000/docs`

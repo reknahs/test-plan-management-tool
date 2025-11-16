@@ -31,6 +31,8 @@ This is a minimal AI-based test plan management tool.
 - Node.js & npm
 - Ollama installed and running
 - Mistral model installed (`ollama pull mistral`)
+- This application requires adequate system resources, especially for AI-powered features. On systems with limited RAM (e.g., 8GB or less), performance may be significantly slower or unusable due to the computational demands of the Mistral 7B model via Ollama.
+
 
 ### Installation & Setup
 

@@ -36,7 +36,7 @@ This is a minimal AI-based test plan management tool.
 
 ### Installation & Setup
 
-#### Backend Setup
+#### Install
 ```bash
 git clone https://github.com/reknahs/test-plan-management-tool.git
 ```
